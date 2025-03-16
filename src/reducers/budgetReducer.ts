@@ -1,10 +1,16 @@
-export type BudgetAction = { type: "ADD_BUDGET"; payload: number } | { type: "SHOW_MODAL"} | { type: "HIDE_MODAL" };
+import { DraftExpense } from "../types";
 
-export type BudgetState = { budget: number, spent:number, remaining:number, isModalOpen: boolean };
+export type BudgetAction = { type: "ADD_BUDGET"; payload: number }
+ | { type: "SHOW_MODAL"}
+ | { type: "HIDE_MODAL" }
+ | { type: "ADD_EXPENSE"; payload: {expense: DraftExpense} }
+ | { type: "DELETE_EXPENSE"; payload: {expense: DraftExpense} };
+
+export type BudgetState = { budget: number, expense:number, remaining:number, isModalOpen: boolean };
 
 export const initialBudgetState: BudgetState = {
    budget: 0,
-   spent: 0,
+   expense: 0,
    remaining: 0,
    isModalOpen: false
    };

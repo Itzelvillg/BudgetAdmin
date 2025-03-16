@@ -26,7 +26,7 @@ export const BudgetTracker = () => {
           </div>
           <div>
             <p className="text-gray-500">Spent so far:</p>
-            <p className="text-3xl font-bold">{formatCurrency(state.spent)}</p>
+            <p className="text-3xl font-bold">{formatCurrency(state.expense)}</p>
           </div>
         </div>
 
