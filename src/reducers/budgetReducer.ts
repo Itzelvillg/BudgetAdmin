@@ -1,4 +1,4 @@
-export type BudgetAction = { type: "ADD_BUDGET"; payload: number } | { type: "SHOW_MODAL", payload: boolean};
+export type BudgetAction = { type: "ADD_BUDGET"; payload: number } | { type: "SHOW_MODAL"} | { type: "HIDE_MODAL" };
 
 export type BudgetState = { budget: number, spent:number, remaining:number, isModalOpen: boolean };
 
@@ -13,6 +13,12 @@ export const initialBudgetState: BudgetState = {
 
     if(action.type === "ADD_BUDGET") {
       return {...state, budget: action.payload};
+    }
+    if(action.type === "SHOW_MODAL") {
+      return {...state, isModalOpen: true};
+    }
+    if(action.type === "HIDE_MODAL") {
+      return {...state, isModalOpen: false};
     }
 
     return state;
