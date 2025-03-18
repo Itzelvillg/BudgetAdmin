@@ -22,17 +22,14 @@ export const BudgetTracker = () => {
         <div className="flex items-center justify-between mt-5">
           <div>
             <p className="text-gray-500">Remaining:</p>
-            <p className="text-3xl font-bold">{formatCurrency(state.remaining)}</p>
+            <p className="text-3xl font-bold">{formatCurrency(state.expenses.reduce((acc, i) => acc - i.amount, state.budget))}</p>
           </div>
           <div>
             <p className="text-gray-500">Spent so far:</p>
-            <p className="text-3xl font-bold">{formatCurrency(state.expense)}</p>
+            <p className="text-3xl font-bold">{formatCurrency(state.expenses.reduce((acc, i) => acc + i.amount, 0))}</p>
           </div>
         </div>
 
-        <div>
-          <AmountDisplay title="oa" amount={0} />
-        </div>
       </div>
     </>
   )

@@ -4,22 +4,22 @@ import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css';
 import { DraftExpense, Value } from "../types";
 import { ErrorMessage } from "./ErrorMessage";
+import { useBudget } from "../hooks/useBudget";
 
 export const ExpenseForm = () => {
   const [expense, setExpense] = useState<DraftExpense>({ expenseName: "", amount: 0, date: new Date(), category: "" })
   const [error, setError] = useState<string | null>(null);
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
+  const { dispatch } = useBudget()
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target
     const isAmount = name.includes("amount")
 
-
     setExpense({ ...expense, [name]: isAmount ? +value : value })
-
   }
+
   const handleDate = (value: Value) => {
     setExpense({ ...expense, date: value })
-
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -30,6 +30,8 @@ export const ExpenseForm = () => {
       return
     }
     setError(null)
+    dispatch({ type: "ADD_EXPENSE", payload: { expense } })
+
   }
 
   return (

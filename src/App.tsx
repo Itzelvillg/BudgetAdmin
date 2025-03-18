@@ -3,6 +3,7 @@ import { BudgetForm } from "./components/BudgetForm"
 import { useBudget } from "./hooks/useBudget"
 import { BudgetTracker } from "./components/BudgetTracker";
 import ExpenseModal from "./components/ExpenseModal";
+import { ExpenseList } from "./components/ExpenseList";
 
 
 export const App = () => {
@@ -19,7 +20,14 @@ export const App = () => {
 
         {isValidBudget ? <BudgetTracker /> : <BudgetForm />}
       </div>
-      {isValidBudget && <ExpenseModal />}
+      {isValidBudget &&
+
+        <main className="container mx-auto bg-white shadow-lg p-10 mt-10 rounded-lg">
+
+          <ExpenseList />
+          <ExpenseModal />
+
+        </main>}
     </div>
   )
 }
