@@ -22,7 +22,7 @@ export const AmountDisplay = ({ expense }: AmountDisplayProps) => {
   const categoryColor = iconCategory()[1]
   console.log(typeof isSavings)
   return (
-    <div className="flex  h-30 items-center mt-5 shadow-md shadow-slate-200 border-t-1 border-t-slate-100 rounded-lg">
+    <div className="flex w-150 h-30 items-center mt-5 shadow-md shadow-slate-200 border-t-1 border-t-slate-100 rounded-lg">
       <div className={`${categoryColor} w-2 h-full rounded-l-lg  p-2`}></div>
       <section className="flex justify-between w-full items-center p-5">
 
@@ -30,9 +30,9 @@ export const AmountDisplay = ({ expense }: AmountDisplayProps) => {
           <img src={`${iconCategory()[0]}.png`} alt={iconCategory()[0]} className="rounded-lg w-10 h-fit " />
 
           <div className="flex flex-col gap-2">
-            <p className="text-slate-600 ">{expense.date?.toLocaleString()}</p>
-            <h2 className="text-2xl font-bold ">{expense.expenseName}</h2>
-            <p className={`${isSavings ? 'text-green-800' : 'text-red-600'}`}>{`${isSavings ? "+" : "-"} ${formatCurrency(+expense.amount)}`}</p>
+            <p className="text-slate-600  ">{expense.date?.toLocaleString()}</p>
+            <h2 className="text-2xl font-bold font- ">{expense.expenseName}</h2>
+            <p className={`${isSavings ? 'text-green-800' : 'text-red-600'} text-lg`}>{`${isSavings ? "+" : "-"} ${formatCurrency(+expense.amount)}`}</p>
           </div>
         </div>
 
