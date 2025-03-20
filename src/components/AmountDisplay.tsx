@@ -12,23 +12,27 @@ export const AmountDisplay = ({ expense }: AmountDisplayProps) => {
 
 
   const iconCategory = () => {
-    const currentCategory = categories.find((category) => category.id === expense.category)?.icon.toLocaleLowerCase().trim()
-    console.log(currentCategory)
-    return currentCategory
+    const categoryIcon = categories.find((category) => category.id === expense.category)?.icon.toLocaleLowerCase().trim()
+    const categoryColor = categories.find((category) => category.id === expense.category)?.color
+    console.log(categoryColor)
+    return [categoryIcon, categoryColor]
   }
-  iconCategory()
+
+  const isSavings = iconCategory()[0] === 'savings'
+  const categoryColor = iconCategory()[1]
+  console.log(typeof isSavings)
   return (
     <div className="flex  h-30 items-center mt-5 shadow-md shadow-slate-200 border-t-1 border-t-slate-100 rounded-lg">
-      <div className="bg-pink-600 w-2 h-full rounded-l-lg  p-2"></div>
+      <div className={`${categoryColor} w-2 h-full rounded-l-lg  p-2`}></div>
       <section className="flex justify-between w-full items-center p-5">
 
         <div className=" flex gap-6 justify-center items-center p-4">
-          <img src={`${iconCategory()}.png`} alt={iconCategory()} className="rounded-lg w-10 h-fit " />
+          <img src={`${iconCategory()[0]}.png`} alt={iconCategory()[0]} className="rounded-lg w-10 h-fit " />
 
           <div className="flex flex-col gap-2">
             <p className="text-slate-600 ">{expense.date?.toLocaleString()}</p>
             <h2 className="text-2xl font-bold ">{expense.expenseName}</h2>
-            <p className={`${iconCategory() === "ahorro" ? 'text-green-800' : 'text-red-600'}`}>{`-${formatCurrency(expense.amount)}`}</p>
+            <p className={`${isSavings ? 'text-green-800' : 'text-red-600'}`}>{`${isSavings ? "+" : "-"} ${formatCurrency(+expense.amount)}`}</p>
           </div>
         </div>
 
