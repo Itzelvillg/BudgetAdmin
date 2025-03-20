@@ -6,7 +6,8 @@ export type BudgetAction = { type: "ADD_BUDGET"; payload: number }
  | { type: "SHOW_MODAL"}
  | { type: "HIDE_MODAL" }
  | { type: "ADD_EXPENSE"; payload: {expense: DraftExpense} }
- | { type: "DELETE_EXPENSE"; payload: {expense: DraftExpense} };
+ | { type: "DELETE_EXPENSE"; payload: {expense: Expense} }
+ | { type: "EDIT_EXPENSE"; payload: {expense: Expense} }
 
 export type BudgetState = { budget: number, expenses:Expense[], remaining:number, isModalOpen: boolean };
 

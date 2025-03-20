@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useBudget } from "../hooks/useBudget";
 import { AmountDisplay } from "./AmountDisplay";
 
@@ -6,12 +7,12 @@ export const ExpenseList = () => {
 
   const { state } = useBudget();
 
-  const isEmpty = state.expenses.length === 0;
+  const isEmpty = useMemo(() => state.expenses.length === 0, [state.expenses])
 
   return (
-    <div> {isEmpty ? <p className="text-center text-2xl">No expenses yet</p> :
+    <div className="space-y-5"> {isEmpty ? <p className="text-center text-2xl font-bold ">No expenses yet</p> :
       state.expenses.map((expenseItem) =>
-        <AmountDisplay key={expenseItem.id} title={expenseItem.expenseName} amount={expenseItem.amount} />
+        <AmountDisplay key={expenseItem.id} expense={expenseItem} />
 
       )
     }</div>
