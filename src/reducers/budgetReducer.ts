@@ -50,5 +50,12 @@ const createExpense = (expense: DraftExpense): Expense => {
       };
     }
 
+    if (action.type === "DELETE_EXPENSE") {
+      return {
+        ...state,
+        expenses: state.expenses.filter(expense => expense.id !== action.payload.expense.id)
+      }
+    }
+
     return state;
    }
