@@ -23,9 +23,12 @@ export const ExpenseForm = () => {
   }
 
   useEffect(() => {
-    const editandooo = state.expenses.filter(expense => expense.id === state.editingExpense)
-    if (editandooo.length === 0) return
-    setExpense(editandooo[0])
+    if (state.editingExpense) {
+
+      const currentExpense = state.expenses.filter(currentExp => currentExp.id === state.editingExpense)[0]
+      setExpense(currentExpense)
+    }
+
   }, [state.editingExpense])
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -42,7 +45,7 @@ export const ExpenseForm = () => {
 
   return (
     <form className="space-y-5 " onSubmit={handleSubmit}>
-      <legend className="text-2xl font-black text-center uppercase border-b-4 border-blue-500 py-2 ">Add Expense</legend>
+      <legend className="text-2xl font-black text-center uppercase border-b-4 border-blue-500 py-2 ">{state.editingExpense ? "Update Expense" : "New Expense"}</legend>
       {error && <ErrorMessage > {error}</ErrorMessage>}
 
       <div className="flex flex-col gap-2">
@@ -74,7 +77,7 @@ export const ExpenseForm = () => {
         />
 
       </div>
-      <input type="submit" value="Add Expense" className="bg-blue-500 font-bold text-xl text-white p-2 rounded-md  w-full cursor-pointer hover:bg-blue-600" />
+      <input type="submit" value={state.editingExpense ? "Update Expense" : "Add Expense"} className="bg-blue-500 font-bold text-xl text-white p-2 rounded-md  w-full cursor-pointer hover:bg-blue-600" />
     </form>
   )
 }

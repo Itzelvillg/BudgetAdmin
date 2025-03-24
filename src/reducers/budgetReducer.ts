@@ -1,3 +1,4 @@
+import { ExpenseList } from "../components/ExpenseList";
 import { DraftExpense, Expense } from "../types";
 import {v4 as uuidv4} from 'uuid'
 
@@ -7,7 +8,7 @@ export type BudgetAction = { type: "ADD_BUDGET"; payload: number }
  | { type: "HIDE_MODAL" }
  | { type: "ADD_EXPENSE"; payload: {expense: DraftExpense} }
  | { type: "DELETE_EXPENSE"; payload: {expense: Expense} }
- | { type: "EDIT_EXPENSE"; payload: {expense: Expense} }
+ | { type: "UPDATE_EXPENSE"; payload: {expense:Expense} }
  | {type: "GET_EXPENSE_ID", payload: {id: Expense["id"]}}
 
 export type BudgetState = { budget: number, expenses:Expense[], remaining:number, isModalOpen: boolean, editingExpense: Expense["id"] };
@@ -33,13 +34,13 @@ const createExpense = (expense: DraftExpense): Expense => {
    export const budgetReducer = (state: BudgetState = initialBudgetState, action: BudgetAction) => {
 
     if(action.type === "ADD_BUDGET") {
-      return {...state, budget: action.payload};
+      return {...state, budget: action.payload,};
     }
     if(action.type === "SHOW_MODAL") {
       return {...state, isModalOpen: true};
     }
     if(action.type === "HIDE_MODAL") {
-      return {...state, isModalOpen: false};
+      return {...state, isModalOpen: false, editingExpense: ''};
     }
     if (action.type === "ADD_EXPENSE") {
 
@@ -48,10 +49,19 @@ const createExpense = (expense: DraftExpense): Expense => {
         ...state,
         expenses: [...state.expenses, newExpense],
         isModalOpen: false,
+         editingExpense: ''
         
       };
     }
+    if(action.type === "UPDATE_EXPENSE") {
+      
 
+      return{
+        ...state,
+        expenses: state.expenses.map(expense => expense.id === action.payload.)
+
+      }
+    }
     if (action.type === "DELETE_EXPENSE") {
       return {
         ...state,
