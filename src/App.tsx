@@ -16,18 +16,21 @@ export const App = () => {
       <header className="bg-blue-700 text-white text-center py-8 max-h-72">
         <h1 className="uppercase text-4xl font-black text-white"> budget  Administrator</h1>
       </header>
-      <div className="container mx-auto bg-white shadow-lg p-10 mt-10 rounded-lg">
+      <div className="flex gap-5 px-5">
 
-        {isValidBudget ? <BudgetTracker /> : <BudgetForm />}
+        <div className="container mx-auto h-fit bg-white shadow-lg p-10 mt-10 rounded-lg">
+
+          {isValidBudget ? <BudgetTracker /> : <BudgetForm />}
+        </div>
+        {isValidBudget &&
+
+          <main className="container mx-auto overflow-y-scroll h-200 bg-white shadow-lg p-10 mt-10 rounded-lg">
+
+            <ExpenseList />
+            <ExpenseModal />
+
+          </main>}
       </div>
-      {isValidBudget &&
-
-        <main className="container mx-auto bg-white shadow-lg p-10 mt-10 rounded-lg">
-
-          <ExpenseList />
-          <ExpenseModal />
-
-        </main>}
     </div>
   )
 }

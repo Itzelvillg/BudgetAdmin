@@ -16,13 +16,17 @@ export const AmountDisplay = ({ expense }: AmountDisplayProps) => {
   const handleDelete = () => {
     dispatch({ type: "DELETE_EXPENSE", payload: { expense } })
   }
+  const handleEdit = () => {
+    dispatch({ type: "GET_EXPENSE_ID", payload: { id: expense.id } })
+  }
 
   const categoryInfo = useMemo(() => categories.filter(cat => cat.id === expense.category)[0], categories)
+  console.log(categoryInfo)
   const isSavings = categoryInfo?.icon === "savings"
 
 
   return (
-    <div className="flex w-150 h-30 items-center mt-5 shadow-md shadow-slate-200 border-t-1 border-t-slate-100 rounded-lg">
+    <div className="flex w-full h-30 items-center mt-5 shadow-md shadow-slate-200 border-t-1 border-t-slate-100 rounded-lg">
       <div className={`${categoryInfo.color} w-2 h-full rounded-l-lg  p-2`}></div>
       <section className="flex justify-between w-full items-center p-5">
 
@@ -37,7 +41,7 @@ export const AmountDisplay = ({ expense }: AmountDisplayProps) => {
         </div>
 
         <div className="flex flex-col">
-          <button className="bg-slate-400 text-white px-2 py-1 mt-2 rounded-md">Edit</button>
+          <button className="bg-slate-400 text-white px-2 py-1 mt-2 rounded-md" onClick={handleEdit}>Edit</button>
           <button className="bg-red-400 text-white px-2 py-1 mt-2 rounded-md" onClick={handleDelete}>Delete</button>
 
         </div>

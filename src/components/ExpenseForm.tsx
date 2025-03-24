@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { categories } from "../data/categories"
 import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css';
@@ -9,7 +9,7 @@ import { useBudget } from "../hooks/useBudget";
 export const ExpenseForm = () => {
   const [expense, setExpense] = useState<DraftExpense>({ expenseName: "", amount: 0, date: new Date(), category: "" })
   const [error, setError] = useState<string | null>(null);
-  const { dispatch } = useBudget()
+  const { state, dispatch } = useBudget()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -21,6 +21,12 @@ export const ExpenseForm = () => {
   const handleDate = (value: Value) => {
     setExpense({ ...expense, date: value })
   }
+
+  useEffect(() => {
+    const editandooo = state.expenses.filter(expense => expense.id === state.editingExpense)
+    if (editandooo.length === 0) return
+    setExpense(editandooo[0])
+  }, [state.editingExpense])
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -51,7 +57,7 @@ export const ExpenseForm = () => {
 
       <div className="flex flex-col gap-2">
         <label htmlFor="category" className=" text-2xl">Category</label>
-        <select id="category" onChange={handleChange} name="category" className="p-2 border bg-slate-100 border-slate-300 rounded-md ">
+        <select id="category" onChange={handleChange} value={expense.category} name="category" className="p-2 border bg-slate-100 border-slate-300 rounded-md ">
           <option value="">-- Select a category --</option>
           {categories.map((category) => (<option key={category.id} value={category.id}>{category.name}</option>))}
         </select>

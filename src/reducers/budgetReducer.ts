@@ -8,14 +8,16 @@ export type BudgetAction = { type: "ADD_BUDGET"; payload: number }
  | { type: "ADD_EXPENSE"; payload: {expense: DraftExpense} }
  | { type: "DELETE_EXPENSE"; payload: {expense: Expense} }
  | { type: "EDIT_EXPENSE"; payload: {expense: Expense} }
+ | {type: "GET_EXPENSE_ID", payload: {id: Expense["id"]}}
 
-export type BudgetState = { budget: number, expenses:Expense[], remaining:number, isModalOpen: boolean };
+export type BudgetState = { budget: number, expenses:Expense[], remaining:number, isModalOpen: boolean, editingExpense: Expense["id"] };
 
 export const initialBudgetState: BudgetState = {
    budget: 0,
    expenses:[],
    remaining: 0,
-   isModalOpen: false
+   isModalOpen: false,
+   editingExpense: ''
    };
 
 
@@ -57,5 +59,12 @@ const createExpense = (expense: DraftExpense): Expense => {
       }
     }
 
+    if(action.type === "GET_EXPENSE_ID") {
+      return {
+        ...state,
+        editingExpense: action.payload.id,
+        isModalOpen: true
+      }
+    }
     return state;
    }
