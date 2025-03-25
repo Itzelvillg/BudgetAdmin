@@ -39,6 +39,11 @@ export const ExpenseForm = () => {
       return
     }
     setError(null)
+    if (state.editingExpense) {
+      const editingExpense = { ...expense, id: state.editingExpense }
+      dispatch({ type: "UPDATE_EXPENSE", payload: { expense: editingExpense } })
+      return
+    }
     dispatch({ type: "ADD_EXPENSE", payload: { expense } })
 
   }

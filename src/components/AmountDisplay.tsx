@@ -20,7 +20,7 @@ export const AmountDisplay = ({ expense }: AmountDisplayProps) => {
     dispatch({ type: "GET_EXPENSE_ID", payload: { id: expense.id } })
   }
 
-  const categoryInfo = useMemo(() => categories.filter(cat => cat.id === expense.category)[0], categories)
+  const categoryInfo = useMemo(() => categories.filter(cat => cat.id === expense.category)[0], [expense.category])
   console.log(categoryInfo)
   const isSavings = categoryInfo?.icon === "savings"
 

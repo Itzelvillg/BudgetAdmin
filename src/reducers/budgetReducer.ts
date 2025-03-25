@@ -1,4 +1,4 @@
-import { ExpenseList } from "../components/ExpenseList";
+
 import { DraftExpense, Expense } from "../types";
 import {v4 as uuidv4} from 'uuid'
 
@@ -58,7 +58,9 @@ const createExpense = (expense: DraftExpense): Expense => {
 
       return{
         ...state,
-        expenses: state.expenses.map(expense => expense.id === action.payload.)
+        expenses: state.expenses.map(expense => expense.id === action.payload.expense.id? action.payload.expense : expense),
+        isModalOpen: false,
+        editingExpense: ''
 
       }
     }
