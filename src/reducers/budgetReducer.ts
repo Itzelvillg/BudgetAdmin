@@ -10,12 +10,24 @@ export type BudgetAction = { type: "ADD_BUDGET"; payload: number }
  | { type: "DELETE_EXPENSE"; payload: {expense: Expense} }
  | { type: "UPDATE_EXPENSE"; payload: {expense:Expense} }
  | {type: "GET_EXPENSE_ID", payload: {id: Expense["id"]}}
+ | {type:"RESET_APP"}
 
 export type BudgetState = { budget: number, expenses:Expense[], remaining:number, isModalOpen: boolean, editingExpense: Expense["id"] };
 
+
+const initialBudget = ():number => {
+  const localStorageBudget = localStorage.getItem('budget');
+  return localStorageBudget ? +localStorageBudget : 0;
+}
+const initialExpenses = (): Expense[] => {
+  const localStorageExpenses = localStorage.getItem('expenses');
+  return localStorageExpenses ? JSON.parse(localStorageExpenses): [];
+}
+
+
 export const initialBudgetState: BudgetState = {
-   budget: 0,
-   expenses:[],
+   budget: initialBudget(),
+   expenses:initialExpenses(),
    remaining: 0,
    isModalOpen: false,
    editingExpense: ''
@@ -30,6 +42,8 @@ const createExpense = (expense: DraftExpense): Expense => {
   }
 
 }
+
+
 
    export const budgetReducer = (state: BudgetState = initialBudgetState, action: BudgetAction) => {
 
@@ -53,6 +67,13 @@ const createExpense = (expense: DraftExpense): Expense => {
         
       };
     }
+    if(action.type === "RESET_APP") {
+      return{
+        expense: localStorage.removeItem('expenses'),
+        budget: localStorage.removeItem('budget'),
+        editingExpense: '',
+    
+      }}
     if(action.type === "UPDATE_EXPENSE") {
       
 

@@ -28,12 +28,12 @@ export const AmountDisplay = ({ expense }: AmountDisplayProps) => {
 
 
   return (
-    <div className="flex w-full h-30 items-center mt-5 shadow-md shadow-slate-200 border-t-1 border-t-slate-100 rounded-lg">
+    <div className="flex bg-stone-50 w-full h-30 items-center mt-5 shadow-md shadow-slate-200 border-t-1 border-t-slate-100 rounded-lg">
       <div className={`${categoryInfo.color} w-2 h-full rounded-l-lg  p-2`}></div>
       <section className="flex justify-between w-full items-center p-5">
 
         <div className=" flex gap-6 justify-center items-center p-4">
-          <img src={`${categoryInfo.icon}.png`} alt={categoryInfo.name} className="rounded-lg w-10 h-fit " />
+          <img src={`${categoryInfo.icon}.png`} alt={categoryInfo.name} className="rounded-lg w-13 h-fit " />
 
           <div className="flex flex-col gap-2">
             <p className="text-slate-600  ">{expense.date?.toLocaleString()}</p>
@@ -43,11 +43,11 @@ export const AmountDisplay = ({ expense }: AmountDisplayProps) => {
         </div>
 
         <div className="flex flex-col">
-          <button className="bg-slate-400 text-white px-2 py-1 mt-2 rounded-md" onClick={handleEdit}>Edit</button>
-          <button className="bg-red-400 text-white px-2 py-1 mt-2 rounded-md" onClick={handleDelete}>Delete</button>
+          <button className=" hover:border-blue-200 hover:border-4 text-white px-2 py-1 mt-2 rounded-md" onClick={handleEdit}  ><img src="edit.png" className="w-8 h-auto" alt="edit" /> </button>
+          <button className="hover:border-red-200 hover:border-4 text-white px-2 py-1 mt-2 rounded-md" onClick={handleDelete}><img src="delete.png" className="w-8 h-auto" alt="edit" /></button>
 
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   )
 }

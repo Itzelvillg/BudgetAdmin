@@ -1,11 +1,11 @@
 import { formatCurrency } from "../helpers";
 import { useBudget } from "../hooks/useBudget";
-import { AmountDisplay } from "./AmountDisplay";
+
 
 
 export const BudgetTracker = () => {
 
-  const { state } = useBudget();
+  const { state, dispatch } = useBudget();
 
   return (
     <>
@@ -14,7 +14,7 @@ export const BudgetTracker = () => {
           <img src="https://img.icons8.com/office/452/money.png" alt="money" className="w-40 h-40" />
         </div>
         <div className="flex flex-col justify-end items-center gap-8">
-          <button className="bg-pink-600 w-full p-2 uppercase rounded-lg text-white font-bold">Reset APP</button>
+          <button className="bg-pink-600 w-full p-2 uppercase rounded-lg text-white font-bold" onClick={() => dispatch({ type: "RESET_APP" })}>Reset APP</button>
         </div>
       </div>
       < div>
