@@ -12,10 +12,12 @@ type AmountDisplayProps = {
 }
 export const AmountDisplay = ({ expense }: AmountDisplayProps) => {
 
-  const { dispatch } = useBudget()
+  const { dispatch } = useBudget();
+
   const handleDelete = () => {
     dispatch({ type: "DELETE_EXPENSE", payload: { expense } })
   }
+
   const handleEdit = () => {
     dispatch({ type: "GET_EXPENSE_ID", payload: { id: expense.id } })
   }
