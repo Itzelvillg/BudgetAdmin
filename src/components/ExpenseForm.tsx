@@ -9,7 +9,8 @@ import { useBudget } from "../hooks/useBudget";
 export const ExpenseForm = () => {
   const [expense, setExpense] = useState<DraftExpense>({ expenseName: "", amount: 0, date: new Date(), category: "" })
   const [error, setError] = useState<string | null>(null);
-  const { state, dispatch } = useBudget()
+  const [previousAmount, setPreviousAmount] = useState<number>(0)
+  const { state, dispatch, remaningBudget } = useBudget()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -27,6 +28,7 @@ export const ExpenseForm = () => {
 
       const currentExpense = state.expenses.filter(currentExp => currentExp.id === state.editingExpense)[0]
       setExpense(currentExpense)
+      setPreviousAmount(currentExpense.amount)
     }
 
   }, [state.editingExpense])
@@ -36,6 +38,12 @@ export const ExpenseForm = () => {
 
     if (Object.values(expense).includes("")) {
       setError("Please fill all the fields")
+
+      return
+    }
+
+    if ((expense.amount - previousAmount) > remaningBudget) {
+      setError("You can exceed the remaining budget")
       return
     }
     setError(null)
@@ -46,6 +54,9 @@ export const ExpenseForm = () => {
     }
 
     dispatch({ type: "ADD_EXPENSE", payload: { expense } })
+
+    setExpense({ expenseName: "", amount: 0, date: new Date(), category: "" })
+    setPreviousAmount(0)
 
   }
 

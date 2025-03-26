@@ -23,7 +23,7 @@ export const AmountDisplay = ({ expense }: AmountDisplayProps) => {
   }
 
   const categoryInfo = useMemo(() => categories.filter(cat => cat.id === expense.category)[0], [expense.category])
-  console.log(categoryInfo)
+
   const isSavings = categoryInfo?.icon === "savings"
 
 

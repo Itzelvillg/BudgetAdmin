@@ -5,7 +5,7 @@ import { useBudget } from "../hooks/useBudget";
 
 export const BudgetTracker = () => {
 
-  const { state, dispatch } = useBudget();
+  const { state, dispatch, totalExpenses, remaningBudget } = useBudget();
 
   return (
     <>
@@ -22,11 +22,11 @@ export const BudgetTracker = () => {
         <div className="flex items-center justify-between mt-5">
           <div>
             <p className="text-gray-500">Remaining:</p>
-            <p className="text-3xl font-bold">{formatCurrency(state.expenses.reduce((acc, i) => acc - i.amount, state.budget))}</p>
+            <p className="text-3xl font-bold">{formatCurrency(remaningBudget)}</p>
           </div>
           <div>
             <p className="text-gray-500">Spent so far:</p>
-            <p className="text-3xl font-bold">{formatCurrency(state.expenses.reduce((acc, i) => acc + i.amount, 0))}</p>
+            <p className="text-3xl font-bold">{formatCurrency(totalExpenses)}</p>
           </div>
         </div>
 

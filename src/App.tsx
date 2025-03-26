@@ -12,6 +12,7 @@ export const App = () => {
   useEffect(() => {
     localStorage.setItem("budget", state.budget.toString())
     localStorage.setItem("expenses", JSON.stringify(state.expenses))
+
   }, [state])
 
   const isValidBudget = useMemo(() => +state.budget > 0, [state.budget])
