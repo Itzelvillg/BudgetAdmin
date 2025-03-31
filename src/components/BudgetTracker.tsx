@@ -1,22 +1,16 @@
 import { formatCurrency } from "../helpers";
 import { useBudget } from "../hooks/useBudget";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+
 
 
 export const BudgetTracker = () => {
 
-  const { state, dispatch, totalExpenses, remaningBudget } = useBudget();
+  const { state, totalExpenses, remaningBudget } = useBudget();
+
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="flex justify-center">
-          <CircularProgressbar value={state.budget} />
-        </div>
-        <div className="flex flex-col justify-end items-center gap-8">
-          <button className="bg-pink-600 w-full p-2 uppercase rounded-lg text-white font-bold" onClick={() => dispatch({ type: "RESET_APP" })}>Reset APP</button>
-        </div>
-      </div>
+      <h1 className="text-4xl font-black text-center text-blue-700">Budget Tracker</h1>
       < div>
         <h2 className="text-2xl font-bold">Budget: {formatCurrency(state.budget)}</h2>
         <div className="flex items-center justify-between mt-5">

@@ -11,8 +11,9 @@ export const ExpenseList = () => {
 
   return (
     <div className=" ">
-
+      {!isEmpty && <h2 className="text-2xl font-bold text-center uppercase">Expenses list</h2>}
       {isEmpty ? <p className="text-center text-2xl font-bold ">No expenses yet</p> :
+
         state.expenses.map((expenseItem) =>
           <AmountDisplay key={expenseItem.id} expense={expenseItem} />
 
