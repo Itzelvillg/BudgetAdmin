@@ -1,5 +1,4 @@
-import { ExpenseList } from "../components/ExpenseList";
-import { DraftExpense, Expense } from "../types";
+import { Category, DraftExpense, Expense } from "../types";
 import { v4 as uuidv4 } from "uuid";
 
 export type BudgetAction =
@@ -10,12 +9,13 @@ export type BudgetAction =
   | { type: "DELETE_EXPENSE"; payload: { expense: Expense } }
   | { type: "UPDATE_EXPENSE"; payload: { expense: Expense } }
   | { type: "GET_EXPENSE_ID"; payload: { id: Expense["id"] } }
-  | { type: "RESET_APP" };
+  | { type: "RESET_APP" }
+  | { type: "SET_CURRENT_CATEGORY"; payload: { category: Category["id"] } };
 
 export type BudgetState = {
   budget: number;
   expenses: Expense[];
-  remaining: number;
+  currentCategory: Category["id"];
   isModalOpen: boolean;
   editingExpense: Expense["id"];
 };
@@ -32,7 +32,7 @@ const initialExpenses = (): Expense[] => {
 export const initialBudgetState: BudgetState = {
   budget: initialBudget(),
   expenses: initialExpenses(),
-  remaining: 0,
+  currentCategory: "",
   isModalOpen: false,
   editingExpense: "",
 };
@@ -103,5 +103,12 @@ export const budgetReducer = (
       isModalOpen: true,
     };
   }
+  if (action.type === "SET_CURRENT_CATEGORY") {
+    return {
+      ...state,
+      currentCategory: action.payload.category,
+    };
+  }
+
   return state;
 };

@@ -6,6 +6,7 @@ import ExpenseModal from "./components/ExpenseModal";
 import { ExpenseList } from "./components/ExpenseList";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { FilterByCategory } from "./components/FilterByCategory";
 
 export const App = () => {
   const { state, remaningBudget, dispatch } = useBudget();
@@ -64,6 +65,7 @@ export const App = () => {
 
         {isValidBudget && (
           <main className="container mx-auto overflow-y-scroll h-200 bg-white shadow-lg p-10 mt-10 rounded-lg">
+            <FilterByCategory />
             <ExpenseList />
             <ExpenseModal />
           </main>
