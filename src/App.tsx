@@ -9,7 +9,7 @@ import "react-circular-progressbar/dist/styles.css";
 import { FilterByCategory } from "./components/FilterByCategory";
 
 export const App = () => {
-  const { state, remaningBudget, dispatch } = useBudget();
+  const { state, remaningBudget, dispatch, totalSavings } = useBudget();
 
   useEffect(() => {
     localStorage.setItem("budget", state.budget.toString());
@@ -71,6 +71,7 @@ export const App = () => {
           </main>
         )}
       </div>
+
     </div>
   );
 };

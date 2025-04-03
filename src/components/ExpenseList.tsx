@@ -7,8 +7,8 @@ export const ExpenseList = () => {
 
   const { state } = useBudget();
 
-  const isEmpty = useMemo(() => state.expenses.length === 0, [state.expenses])
   const filteredExpenses = state.currentCategory ? state.expenses.filter(expense => expense.category === state.currentCategory) : state.expenses
+  const isEmpty = useMemo(() => filteredExpenses.length === 0, [filteredExpenses])
   return (
     <div className=" ">
       {!isEmpty || filteredExpenses.length > 0 && <h2 className="text-2xl font-bold  uppercase">Expenses list</h2>}

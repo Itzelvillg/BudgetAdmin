@@ -42,11 +42,12 @@ export const ExpenseForm = () => {
       return
     }
 
-    if ((expense.amount - previousAmount) > remaningBudget) {
+    if ((expense.amount - previousAmount) > remaningBudget && expense.category !== "1") {
       setError("You can exceed the remaining budget")
       return
     }
     setError(null)
+
     if (state.editingExpense) {
       const editingExpense = { ...expense, id: state.editingExpense }
       dispatch({ type: "UPDATE_EXPENSE", payload: { expense: editingExpense } })

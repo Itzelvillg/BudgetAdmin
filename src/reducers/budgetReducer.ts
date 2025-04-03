@@ -59,6 +59,21 @@ export const budgetReducer = (
   }
   if (action.type === "ADD_EXPENSE") {
     const newExpense = createExpense(action.payload.expense);
+    console.log(newExpense);
+
+    if (newExpense.category === "1") {
+      const SavingExpense = {
+        ...newExpense,
+        amount: +newExpense.amount,
+      };
+
+      return {
+        ...state,
+        expenses: [...state.expenses, SavingExpense],
+        isModalOpen: false,
+        editingExpense: "",
+      };
+    }
     return {
       ...state,
       expenses: [...state.expenses, newExpense],
