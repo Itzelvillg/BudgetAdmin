@@ -15,7 +15,7 @@ export const useBudgetStore = create<BudgetStoreType>((set) => ({
   budget: 0,
   savings: 0,
   expenses: [],
-  setBudget: (initialBudget) => set(() => ({ budget: initialBudget })),
+  setBudget: (initialBudget = 0) => set(() => ({ budget: initialBudget })),
   setExpenses: (expenses) => set(() => ({ expenses })),
   resetBudget: () => set({ budget: 0 }),
 }));

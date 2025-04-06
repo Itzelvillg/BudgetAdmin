@@ -1,6 +1,6 @@
 import { useReducer, createContext, ReactNode, useMemo } from "react";
 import { BudgetAction, budgetReducer, BudgetState, initialBudgetState } from "../reducers/budgetReducer";
-import { useBudgetStore } from "../store/BudgetStore";
+import { useBudgetStore } from "../store/useBudgetStore";
 
 
 

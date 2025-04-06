@@ -7,11 +7,11 @@ import { ExpenseList } from "./components/ExpenseList";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { FilterByCategory } from "./components/FilterByCategory";
-import { useBudgetStore } from "./store/BudgetStore";
+import { useBudgetStore } from "./store/useBudgetStore";
 
 export const App = () => {
   const { state, remaningBudget, dispatch, totalSavings } = useBudget();
-  const { budget, setBudget } = useBudgetStore()
+  const { budget, setBudget, setExpenses, expenses } = useBudgetStore()
   useEffect(() => {
     localStorage.setItem("budget", state.budget.toString());
     localStorage.setItem("expenses", JSON.stringify(state.expenses));
@@ -30,7 +30,9 @@ export const App = () => {
           {" "}
           Personal Finance tracker {budget}
         </h1>
-        <button className="p-2 bg-amber-50" onClick={setBudget}>BUUUU</button>
+        <button className="p-2 bg-amber-50" onClick={() => setExpenses([{ id: '', expenseName: '1cola', amount: 1, date: new Date(), category: '1' }])}>
+
+          BUUUU</button>
         <button
           className="bg-pink-600 w-50 p-2 uppercase rounded-lg text-white font-bold"
           onClick={() => dispatch({ type: "RESET_APP" })}
