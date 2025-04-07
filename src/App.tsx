@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { BudgetForm } from "./components/BudgetForm";
-import { useBudget } from "./hooks/useBudget";
+
 import { BudgetTracker } from "./components/BudgetTracker";
 import ExpenseModal from "./components/ExpenseModal";
 import { ExpenseList } from "./components/ExpenseList";
@@ -10,8 +10,8 @@ import { FilterByCategory } from "./components/FilterByCategory";
 import { useBudgetStore } from "./store/useBudgetStore";
 
 export const App = () => {
-  const { state, remaningBudget, dispatch, totalSavings } = useBudget();
-  const { budget, expenses, resetBudget } = useBudgetStore()
+
+  const { budget, expenses, resetBudget, remaningBudget } = useBudgetStore()
 
   useEffect(() => {
     localStorage.setItem("budget", budget.toString());
@@ -21,7 +21,7 @@ export const App = () => {
   const isValidBudget = useMemo(() => +budget > 0, [budget]);
 
   const percentage = +(
-    ((budget - remaningBudget) / budget) *
+    ((budget - remaningBudget()) / budget) *
     100
   ).toFixed(2);
 

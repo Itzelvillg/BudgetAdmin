@@ -6,13 +6,20 @@ import { DraftExpense, Value } from "../types";
 import { ErrorMessage } from "./ErrorMessage";
 import { useBudget } from "../hooks/useBudget";
 import { useBudgetStore } from "../store/useBudgetStore";
+import { v4 as uuidv4 } from "uuid";
 
 export const ExpenseForm = () => {
-  const [expense, setExpense] = useState<DraftExpense>({ expenseName: "", amount: 0, date: new Date(), category: "" })
+
   const [error, setError] = useState<string | null>(null);
+  const [expense, setExpense] = useState<DraftExpense>({ expenseName: "", amount: 0, date: new Date(), category: "" })
+
   const [previousAmount, setPreviousAmount] = useState<number>(0)
   const addExpenses = useBudgetStore(state => state.addExpenses)
-  const { state, dispatch, remaningBudget } = useBudget()
+  const remaningBudget = useBudgetStore(state => state.remaningBudget)
+
+  const editingExpense = useBudgetStore(state => state.editingExpense)
+  const { state, } = useBudget()
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -26,14 +33,14 @@ export const ExpenseForm = () => {
   }
 
   useEffect(() => {
-    if (state.editingExpense) {
+    if (editingExpense) {
 
       const currentExpense = state.expenses.filter(currentExp => currentExp.id === state.editingExpense)[0]
       setExpense(currentExpense)
       setPreviousAmount(currentExpense.amount)
     }
 
-  }, [state.editingExpense])
+  }, [editingExpense])
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -44,19 +51,23 @@ export const ExpenseForm = () => {
       return
     }
 
-    if ((expense.amount - previousAmount) > remaningBudget && expense.category !== "1") {
+    if ((expense.amount - previousAmount) > remaningBudget() && expense.category !== "1") {
       setError("You can exceed the remaining budget")
       return
     }
     setError(null)
 
-    if (state.editingExpense) {
-      const editingExpense = { ...expense, id: state.editingExpense }
-      dispatch({ type: "UPDATE_EXPENSE", payload: { expense: editingExpense } })
+    if (editingExpense) {
+      const currentEditingExpense = { ...expense, id: editingExpense }
+
+
+      //update
+      addExpenses(currentEditingExpense)
       return
     }
 
-    dispatch({ type: "ADD_EXPENSE", payload: { expense } })
+    const newExpense = { ...expense, id: uuidv4() }
+    addExpenses(newExpense)
 
     setExpense({ expenseName: "", amount: 0, date: new Date(), category: "" })
     setPreviousAmount(0)
@@ -65,7 +76,7 @@ export const ExpenseForm = () => {
 
   return (
     <form className="space-y-5 " onSubmit={handleSubmit}>
-      <legend className="text-2xl font-black text-center uppercase border-b-4 border-blue-500 py-2 ">{state.editingExpense ? "Update Expense" : "New Expense"}</legend>
+      <legend className="text-2xl font-black text-center uppercase border-b-4 border-blue-500 py-2 ">{editingExpense ? "Update Expense" : "New Expense"}</legend>
       {error && <ErrorMessage > {error}</ErrorMessage>}
 
       <div className="flex flex-col gap-2">
@@ -97,7 +108,7 @@ export const ExpenseForm = () => {
         />
 
       </div>
-      <input type="submit" value={state.editingExpense ? "Update Expense" : "Add Expense"} className="bg-blue-500 font-bold text-xl text-white p-2 rounded-md  w-full cursor-pointer hover:bg-blue-600" />
+      <input type="submit" value={editingExpense ? "Update Expense" : "Add Expense"} className="bg-blue-500 font-bold text-xl text-white p-2 rounded-md  w-full cursor-pointer hover:bg-blue-600" />
     </form>
   )
 }
