@@ -1,25 +1,28 @@
 import { Fragment } from 'react'
 import { PlusCircleIcon } from '@heroicons/react/24/solid'
 import { Dialog, Transition } from '@headlessui/react'
-import { useBudget } from '../hooks/useBudget';
+
 import { ExpenseForm } from './ExpenseForm';
+import { useBudgetStore } from '../store/useBudgetStore';
 
 export default function ExpenseModal() {
-  const { state, dispatch } = useBudget();
+
+  const isModalOpen = useBudgetStore(state => state.isModalOpen)
+  const toogleModal = useBudgetStore(state => state.toogleModal)
 
 
   return (
     <>
       <div className="fixed right-5 bottom-5 flex items-center justify-center">
         <button
-          type="button" onClick={() => dispatch({ type: "SHOW_MODAL" })}
+          type="button" onClick={() => toogleModal()}
         >
           <PlusCircleIcon className='w-16 h-16 text-blue-600 rounded-full' />
         </button>
       </div>
 
-      <Transition appear show={state.isModalOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={() => dispatch({ type: "HIDE_MODAL" })}>
+      <Transition appear show={isModalOpen} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={() => toogleModal()}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"

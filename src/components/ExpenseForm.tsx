@@ -5,11 +5,13 @@ import 'react-date-picker/dist/DatePicker.css';
 import { DraftExpense, Value } from "../types";
 import { ErrorMessage } from "./ErrorMessage";
 import { useBudget } from "../hooks/useBudget";
+import { useBudgetStore } from "../store/useBudgetStore";
 
 export const ExpenseForm = () => {
   const [expense, setExpense] = useState<DraftExpense>({ expenseName: "", amount: 0, date: new Date(), category: "" })
   const [error, setError] = useState<string | null>(null);
   const [previousAmount, setPreviousAmount] = useState<number>(0)
+  const addExpenses = useBudgetStore(state => state.addExpenses)
   const { state, dispatch, remaningBudget } = useBudget()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {

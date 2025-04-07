@@ -1,18 +1,19 @@
 import { formatCurrency } from "../helpers";
 import { useBudget } from "../hooks/useBudget";
+import { useBudgetStore } from "../store/useBudgetStore";
 
 
 
 export const BudgetTracker = () => {
 
   const { state, totalExpenses, remaningBudget, totalSavings } = useBudget();
-
+  const budget = useBudgetStore(state => state.budget)
 
   return (
     <>
       <h1 className="text-4xl font-black text-center text-blue-700">Budget Tracker</h1>
       < div>
-        <h2 className="text-2xl font-bold">Budget: {formatCurrency(state.budget)}</h2>
+        <h2 className="text-2xl font-bold">Budget: {formatCurrency(budget)}</h2>
         <div className="flex items-center justify-between mt-5">
           <div className="flex flex-col items-center bg-green-900 p-4 rounded text-white">
             <p className="text-gray-500">Remaining:</p>

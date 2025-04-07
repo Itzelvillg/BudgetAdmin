@@ -5,17 +5,21 @@ import { Expense } from '../types';
 type BudgetStoreType = {
   budget: number;
   expenses: Expense[];
-  setExpenses: (expenses: Expense[]) => void;
   savings: number;
-  setBudget: (initialBudget: number) => void;
+  addExpenses: (expense: Expense) => void;
+  isModalOpen: boolean;
+  addBudget: (initialBudget: number) => void;
   resetBudget: () => void;
+  toogleModal: () => void;
 };
 
 export const useBudgetStore = create<BudgetStoreType>((set) => ({
   budget: 0,
   savings: 0,
   expenses: [],
-  setBudget: (initialBudget = 0) => set(() => ({ budget: initialBudget })),
-  setExpenses: (expenses) => set(() => ({ expenses })),
+  isModalOpen: false,
+  addBudget: (initialBudget = 0) => set(() => ({ budget: initialBudget })),
+  addExpenses: (expense: Expense) => set((state) => ({ expenses: [...state.expenses, expense] })),
   resetBudget: () => set({ budget: 0 }),
+  toogleModal: () => set((state) => ({ isModalOpen: !state.isModalOpen }))
 }));

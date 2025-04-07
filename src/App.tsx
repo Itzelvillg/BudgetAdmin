@@ -11,15 +11,17 @@ import { useBudgetStore } from "./store/useBudgetStore";
 
 export const App = () => {
   const { state, remaningBudget, dispatch, totalSavings } = useBudget();
-  const { budget, setBudget, setExpenses, expenses } = useBudgetStore()
-  useEffect(() => {
-    localStorage.setItem("budget", state.budget.toString());
-    localStorage.setItem("expenses", JSON.stringify(state.expenses));
-  }, [state]);
+  const { budget, expenses, resetBudget } = useBudgetStore()
 
-  const isValidBudget = useMemo(() => +state.budget > 0, [state.budget]);
+  useEffect(() => {
+    localStorage.setItem("budget", budget.toString());
+    localStorage.setItem("expenses", JSON.stringify(expenses));
+  }, [budget, expenses]);
+
+  const isValidBudget = useMemo(() => +budget > 0, [budget]);
+
   const percentage = +(
-    ((state.budget - remaningBudget) / state.budget) *
+    ((budget - remaningBudget) / budget) *
     100
   ).toFixed(2);
 
@@ -28,14 +30,12 @@ export const App = () => {
       <header className="bg-blue-700 text-white text-center py-8 max-h-72 flex justify-between px-10">
         <h1 className="uppercase text-4xl font-black text-white">
           {" "}
-          Personal Finance tracker {budget}
+          Personal Finance tracker
         </h1>
-        <button className="p-2 bg-amber-50" onClick={() => setExpenses([{ id: '', expenseName: '1cola', amount: 1, date: new Date(), category: '1' }])}>
 
-          BUUUU</button>
         <button
           className="bg-pink-600 w-50 p-2 uppercase rounded-lg text-white font-bold"
-          onClick={() => dispatch({ type: "RESET_APP" })}
+          onClick={() => resetBudget()}
         >
           Reset APP
         </button>
