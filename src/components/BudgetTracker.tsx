@@ -7,7 +7,7 @@ import { useBudgetStore } from "../store/useBudgetStore";
 export const BudgetTracker = () => {
 
 
-  const { budget, getRemaningBudget, } = useBudgetStore();
+  const { budget, getRemaningBudget, getSavings, getTotalExpenses } = useBudgetStore();
   return (
     <>
       <h1 className="text-4xl font-black text-center text-blue-700">Budget Tracker</h1>
@@ -20,11 +20,11 @@ export const BudgetTracker = () => {
           </div>
           <div className="flex flex-col items-center bg-green-900 p-4 rounded text-white">
             <p className="text-gray-500">Savings:</p>
-            <p className="text-3xl font-bold">{formatCurrency(12)}pending</p>
+            <p className="text-3xl font-bold">{formatCurrency(getSavings())}</p>
           </div>
           <div className="flex flex-col items-center bg-black p-4 rounded text-white">
             <p className="text-gray-500">Spent so far:</p>
-            <p className="text-3xl font-bold">{formatCurrency(12)}pending</p>
+            <p className="text-3xl font-bold">{formatCurrency(getTotalExpenses())}</p>
           </div>
         </div>
 
