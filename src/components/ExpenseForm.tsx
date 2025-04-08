@@ -15,7 +15,7 @@ export const ExpenseForm = () => {
 
   const [previousAmount, setPreviousAmount] = useState<number>(0)
   const addExpenses = useBudgetStore(state => state.addExpenses)
-  const remaningBudget = useBudgetStore(state => state.remaningBudget)
+  const getRemaningBudget = useBudgetStore(state => state.getRemaningBudget)
 
   const editingExpense = useBudgetStore(state => state.editingExpense)
   const { state, } = useBudget()
@@ -51,7 +51,7 @@ export const ExpenseForm = () => {
       return
     }
 
-    if ((expense.amount - previousAmount) > remaningBudget() && expense.category !== "1") {
+    if ((expense.amount - previousAmount) > getRemaningBudget() && expense.category !== "1") {
       setError("You can exceed the remaining budget")
       return
     }

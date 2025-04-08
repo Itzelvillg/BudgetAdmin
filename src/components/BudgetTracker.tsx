@@ -6,7 +6,7 @@ import { useBudgetStore } from "../store/useBudgetStore";
 
 export const BudgetTracker = () => {
 
-  const { state, totalExpenses, remaningBudget, totalSavings } = useBudget();
+  const { totalExpenses, remaningBudget, totalSavings } = useBudget();
   const budget = useBudgetStore(state => state.budget)
 
   return (

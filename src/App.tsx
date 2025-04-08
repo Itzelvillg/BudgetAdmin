@@ -11,7 +11,7 @@ import { useBudgetStore } from "./store/useBudgetStore";
 
 export const App = () => {
 
-  const { budget, expenses, resetBudget, remaningBudget } = useBudgetStore()
+  const { budget, expenses, resetApp, getRemaningBudget } = useBudgetStore()
 
   useEffect(() => {
     localStorage.setItem("budget", budget.toString());
@@ -21,7 +21,7 @@ export const App = () => {
   const isValidBudget = useMemo(() => +budget > 0, [budget]);
 
   const percentage = +(
-    ((budget - remaningBudget()) / budget) *
+    ((budget - getRemaningBudget()) / budget) *
     100
   ).toFixed(2);
 
@@ -35,7 +35,7 @@ export const App = () => {
 
         <button
           className="bg-pink-600 w-50 p-2 uppercase rounded-lg text-white font-bold"
-          onClick={() => resetBudget()}
+          onClick={() => resetApp()}
         >
           Reset APP
         </button>

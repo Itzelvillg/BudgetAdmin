@@ -4,22 +4,27 @@ import { categories } from "../data/categories";
 import { formatCurrency } from "../helpers";
 import { useBudget } from "../hooks/useBudget";
 import { Expense } from "../types";
+import { useBudgetStore } from "../store/useBudgetStore";
 
 
 type AmountDisplayProps = {
   expense: Expense
 
 }
+
 export const AmountDisplay = ({ expense }: AmountDisplayProps) => {
+  const setCurrentCategory = useBudgetStore(state => state.setCurrentCategory)
 
   const { dispatch } = useBudget();
 
   const handleDelete = () => {
     dispatch({ type: "DELETE_EXPENSE", payload: { expense } })
+
   }
 
   const handleEdit = () => {
-    dispatch({ type: "GET_EXPENSE_ID", payload: { id: expense.id } })
+    setCurrentCategory(expense.category)
+
   }
 
   const categoryInfo = useMemo(() => categories.filter(cat => cat.id === expense.category)[0], [expense.category])

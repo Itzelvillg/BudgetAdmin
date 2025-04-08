@@ -1,13 +1,16 @@
 import { useMemo } from "react";
 import { useBudget } from "../hooks/useBudget";
 import { AmountDisplay } from "./AmountDisplay";
+import { useBudgetStore } from "../store/useBudgetStore";
 
 
 export const ExpenseList = () => {
 
-  const { state } = useBudget();
 
-  const filteredExpenses = state.currentCategory ? state.expenses.filter(expense => expense.category === state.currentCategory) : state.expenses
+  const expenses = useBudgetStore(state => state.expenses);
+  const currentCategory = useBudgetStore(state => state.currentCategory);
+
+  const filteredExpenses = currentCategory ? expenses.filter(expense => expense.category === currentCategory) : expenses
   const isEmpty = useMemo(() => filteredExpenses.length === 0, [filteredExpenses])
   return (
     <div className=" ">
