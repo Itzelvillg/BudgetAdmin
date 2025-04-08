@@ -13,11 +13,13 @@ type BudgetStoreType = {
   getTotalExpenses: () => number;
   getRemaningBudget: () => number;
   addExpenses: (expense: Expense) => void;
+  updateExpense: (expense: Expense) => void;
   deleteExpense: (expenseID: string) => void;
   addBudget: (initialBudget: number) => void;
   resetApp: () => void;
   toggleModal: () => void;
   setCurrentCategory: (categoryID: string) => void;
+  setEditingExpense: (expenseID: string) => void;
 };
 export const useBudgetStore = create<BudgetStoreType>()(
   persist(
@@ -64,7 +66,30 @@ export const useBudgetStore = create<BudgetStoreType>()(
         }),
 
       toggleModal: () => set((state) => ({ isModalOpen: !state.isModalOpen })),
+
+      updateExpense: (expense: Expense) =>
+        set((state) => ({
+          expenses: state.expenses.map((exp) =>
+            exp.id === expense.id ? { ...expense } : exp
+          ),
+          isModalOpen: false,
+          editingExpense: "",
+        })),
+      setEditingExpense: (expenseID) =>
+        set(() => ({
+          editingExpense: expenseID,
+          isModalOpen: true,
+        })),
+
     }),
-    { name: "budget-tracker-storage" }
+    {
+      name: "budget-tracker-storage",
+      partialize: (state) => ({
+        budget: state.budget,
+        expenses: state.expenses,
+        savings: state.savings
+
+      })
+    }
   )
 );

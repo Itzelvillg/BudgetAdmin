@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { categories } from "../data/categories"
 import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css';
+import 'react-calendar/dist/Calendar.css';
 import { DraftExpense, Value } from "../types";
 import { ErrorMessage } from "./ErrorMessage";
-import { useBudget } from "../hooks/useBudget";
+
 import { useBudgetStore } from "../store/useBudgetStore";
 import { v4 as uuidv4 } from "uuid";
 
@@ -14,11 +15,11 @@ export const ExpenseForm = () => {
   const [expense, setExpense] = useState<DraftExpense>({ expenseName: "", amount: 0, date: new Date(), category: "" })
 
   const [previousAmount, setPreviousAmount] = useState<number>(0)
-  const addExpenses = useBudgetStore(state => state.addExpenses)
-  const getRemaningBudget = useBudgetStore(state => state.getRemaningBudget)
+  const { addExpenses, getRemaningBudget, updateExpense } = useBudgetStore()
 
-  const editingExpense = useBudgetStore(state => state.editingExpense)
-  const { state, } = useBudget()
+
+  const { editingExpense, expenses, } = useBudgetStore()
+
 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
@@ -35,7 +36,7 @@ export const ExpenseForm = () => {
   useEffect(() => {
     if (editingExpense) {
 
-      const currentExpense = state.expenses.filter(currentExp => currentExp.id === state.editingExpense)[0]
+      const currentExpense = expenses.filter(currentExp => currentExp.id === editingExpense)[0]
       setExpense(currentExpense)
       setPreviousAmount(currentExpense.amount)
     }
@@ -62,7 +63,7 @@ export const ExpenseForm = () => {
 
 
       //update
-      addExpenses(currentEditingExpense)
+      updateExpense(currentEditingExpense)
       return
     }
 
