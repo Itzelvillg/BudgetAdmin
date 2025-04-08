@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { categories } from "../data/categories"
 import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css';
+
+import 'react-calendar/dist/Calendar.css';
 import { DraftExpense, Value } from "../types";
 import { ErrorMessage } from "./ErrorMessage";
 import { useBudget } from "../hooks/useBudget";
@@ -89,9 +91,10 @@ export const ExpenseForm = () => {
         <DatePicker
           id="date"
           name="date"
-          className="p-2 border bg-slate-100 border-slate-300 rounded-md"
+          className="p-2 border bg-slate-100 border-slate-300 rounded-md "
           value={expense.date}
           onChange={handleDate}
+
         />
 
       </div>

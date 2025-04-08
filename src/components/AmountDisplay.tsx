@@ -36,7 +36,7 @@ export const AmountDisplay = ({ expense }: AmountDisplayProps) => {
           <img src={`${categoryInfo.icon}.png`} alt={categoryInfo.name} className="rounded-lg w-13 h-fit " />
 
           <div className="flex flex-col gap-2">
-            <p className="text-slate-600  ">{expense.date?.toLocaleString()}</p>
+            <p className="text-slate-600  ">{expense.date?.toLocaleString("en-US")}</p>
             <h2 className="text-2xl font-bold font- ">{expense.expenseName}</h2>
             <p className={`${isSavings ? 'text-green-800' : 'text-red-600'} text-lg`}>{`${isSavings ? "+" : "-"} ${formatCurrency(+expense.amount)}`}</p>
           </div>
