@@ -8,21 +8,21 @@ import { useBudgetStore } from '../store/useBudgetStore';
 export default function ExpenseModal() {
 
   const isModalOpen = useBudgetStore(state => state.isModalOpen)
-  const toogleModal = useBudgetStore(state => state.toogleModal)
+  const toggleModal = useBudgetStore(state => state.toggleModal)
 
 
   return (
     <>
       <div className="fixed right-5 bottom-5 flex items-center justify-center">
         <button
-          type="button" onClick={() => toogleModal()}
+          type="button" onClick={() => toggleModal()}
         >
           <PlusCircleIcon className='w-16 h-16 text-blue-600 rounded-full' />
         </button>
       </div>
 
       <Transition appear show={isModalOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={() => toogleModal()}>
+        <Dialog as="div" className="relative z-10" onClose={() => toggleModal()}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"

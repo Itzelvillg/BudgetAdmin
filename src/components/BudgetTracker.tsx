@@ -1,14 +1,13 @@
 import { formatCurrency } from "../helpers";
-import { useBudget } from "../hooks/useBudget";
+
 import { useBudgetStore } from "../store/useBudgetStore";
 
 
 
 export const BudgetTracker = () => {
 
-  const { totalExpenses, remaningBudget, totalSavings } = useBudget();
-  const budget = useBudgetStore(state => state.budget)
 
+  const { budget, getRemaningBudget, } = useBudgetStore();
   return (
     <>
       <h1 className="text-4xl font-black text-center text-blue-700">Budget Tracker</h1>
@@ -17,15 +16,15 @@ export const BudgetTracker = () => {
         <div className="flex items-center justify-between mt-5">
           <div className="flex flex-col items-center bg-green-900 p-4 rounded text-white">
             <p className="text-gray-500">Remaining:</p>
-            <p className="text-3xl font-bold">{formatCurrency(remaningBudget)}</p>
+            <p className="text-3xl font-bold">{formatCurrency(getRemaningBudget())}</p>
           </div>
           <div className="flex flex-col items-center bg-green-900 p-4 rounded text-white">
             <p className="text-gray-500">Savings:</p>
-            <p className="text-3xl font-bold">{formatCurrency(totalSavings)}</p>
+            <p className="text-3xl font-bold">{formatCurrency(12)}pending</p>
           </div>
           <div className="flex flex-col items-center bg-black p-4 rounded text-white">
             <p className="text-gray-500">Spent so far:</p>
-            <p className="text-3xl font-bold">{formatCurrency(totalExpenses)}</p>
+            <p className="text-3xl font-bold">{formatCurrency(12)}pending</p>
           </div>
         </div>
 

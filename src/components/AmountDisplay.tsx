@@ -2,7 +2,7 @@
 import { useMemo } from "react";
 import { categories } from "../data/categories";
 import { formatCurrency } from "../helpers";
-import { useBudget } from "../hooks/useBudget";
+
 import { Expense } from "../types";
 import { useBudgetStore } from "../store/useBudgetStore";
 
@@ -13,13 +13,12 @@ type AmountDisplayProps = {
 }
 
 export const AmountDisplay = ({ expense }: AmountDisplayProps) => {
-  const setCurrentCategory = useBudgetStore(state => state.setCurrentCategory)
+  const { setCurrentCategory, deleteExpense } = useBudgetStore()
 
-  const { dispatch } = useBudget();
 
   const handleDelete = () => {
-    dispatch({ type: "DELETE_EXPENSE", payload: { expense } })
 
+    deleteExpense(expense.id)
   }
 
   const handleEdit = () => {
