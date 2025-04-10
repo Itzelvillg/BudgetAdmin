@@ -38,8 +38,8 @@ export const useBudgetStore = create<BudgetStoreType>()(
 
       getCategoryByID: (categoryName) => {
         const idNumber = Number(categoryName);
-        console.log(idNumber, "idNumber")
-        if (typeof (idNumber) === "number" && !isNaN(idNumber)) {
+
+        if (!isNaN(idNumber)) {
           return categories.filter((cat) => cat.id === categoryName)[0].id;
         }
         const category = categories.filter((cat) => cat.name === categoryName)[0].id;
