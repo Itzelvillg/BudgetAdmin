@@ -13,7 +13,7 @@ type AmountDisplayProps = {
 }
 
 export const AmountDisplay = ({ expense }: AmountDisplayProps) => {
-  const { deleteExpense, setEditingExpense } = useBudgetStore()
+  const { deleteExpense, setEditingExpense, getCategoryByID } = useBudgetStore()
 
 
   const handleDelete = () => {
@@ -29,7 +29,7 @@ export const AmountDisplay = ({ expense }: AmountDisplayProps) => {
 
   const categoryInfo = useMemo(() => categories.filter(cat => cat.id === expense.category)[0], [expense.category])
 
-  const isSavings = categoryInfo?.icon === "savings"
+  const isIncomeOrSavings = getCategoryByID(categoryInfo.name) === getCategoryByID("Savings") || getCategoryByID(categoryInfo.name) === getCategoryByID("Income")
 
 
   return (
@@ -43,7 +43,7 @@ export const AmountDisplay = ({ expense }: AmountDisplayProps) => {
           <div className="flex flex-col gap-2">
             <p className="text-slate-600  ">{expense.date?.toLocaleString()}</p>
             <h2 className="text-2xl font-bold font- ">{expense.expenseName}</h2>
-            <p className={`${isSavings ? 'text-green-800' : 'text-red-600'} text-lg`}>{`${isSavings ? "+" : "-"} ${formatCurrency(+expense.amount)}`}</p>
+            <p className={`${isIncomeOrSavings ? 'text-green-800' : 'text-red-600'} text-lg`}>{`${isIncomeOrSavings ? "+" : "-"} ${formatCurrency(+expense.amount)}`}</p>
           </div>
         </div>
 
