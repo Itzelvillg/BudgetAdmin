@@ -37,14 +37,15 @@ export const useBudgetStore = create<BudgetStoreType>()(
       currentCategory: "",
 
       getCategoryByID: (categoryName) => {
-        const category = categories.filter((cat) => cat.name === categoryName)[0].name;
+        const category = categories.filter((cat) => cat.name === categoryName)[0].id;
         return category;
       },
       getTotalExpenses: () => {
         const savingCat = get().getCategoryByID("Savings")
         const incomeCat = get().getCategoryByID("Income")
-        //TODO: FIX THE SAVINGS AND INCOME CATEGORIES if the user adds an income or saving the total expenses will be wrong
-        return get().expenses.reduce((acc, expense) => expense.category !== savingCat || expense.category !== incomeCat ? acc + expense.amount : acc + 0, 0);
+
+
+        return get().expenses.reduce((acc, expense) => expense.category === savingCat || expense.category === incomeCat ? acc + 0 : acc + expense.amount, 0);
       },
       getRemaningBudget: () => {
         return get().budget - get().getTotalExpenses();
