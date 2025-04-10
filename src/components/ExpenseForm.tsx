@@ -18,7 +18,7 @@ export const ExpenseForm = () => {
   const { addExpenses, getRemaningBudget, updateExpense } = useBudgetStore()
 
 
-  const { editingExpense, expenses, } = useBudgetStore()
+  const { editingExpense, expenses, getCategoryByID, addIncome } = useBudgetStore()
 
 
 
@@ -45,6 +45,8 @@ export const ExpenseForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const isIncomeOrSavings = getCategoryByID(expense.category) === getCategoryByID("Savings") || getCategoryByID(expense.category) === getCategoryByID("Income")
+    const isIncome = getCategoryByID(expense.category) === getCategoryByID("Income")
 
     if (Object.values(expense).includes("")) {
       setError("Please fill all the fields")
@@ -52,7 +54,7 @@ export const ExpenseForm = () => {
       return
     }
 
-    if ((expense.amount - previousAmount) > getRemaningBudget() && expense.category !== "1") {
+    if ((expense.amount - previousAmount) > getRemaningBudget() && !isIncomeOrSavings) {
       setError("You can exceed the remaining budget")
       return
     }
@@ -67,6 +69,10 @@ export const ExpenseForm = () => {
       return
     }
 
+
+    if (isIncome) {
+      addIncome(expense.amount)
+    }
     const newExpense = { ...expense, id: uuidv4() }
     addExpenses(newExpense)
 

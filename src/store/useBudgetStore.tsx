@@ -23,8 +23,8 @@ type BudgetStoreType = {
   setEditingExpense: (expenseID: string) => void;
   getSavings: () => number;
   addSavings: () => void;
-  addIncome: () => number;
-  getCategoryByID: (categoryName: string) => string | undefined;
+  addIncome: (incomeAmount: number) => void;
+  getCategoryByID: (categoryName: string | number) => string | number;
 };
 export const useBudgetStore = create<BudgetStoreType>()(
   persist(
@@ -37,6 +37,11 @@ export const useBudgetStore = create<BudgetStoreType>()(
       currentCategory: "",
 
       getCategoryByID: (categoryName) => {
+        const idNumber = Number(categoryName);
+        console.log(idNumber, "idNumber")
+        if (typeof (idNumber) === "number" && !isNaN(idNumber)) {
+          return categories.filter((cat) => cat.id === categoryName)[0].id;
+        }
         const category = categories.filter((cat) => cat.name === categoryName)[0].id;
         return category;
       },
@@ -54,10 +59,9 @@ export const useBudgetStore = create<BudgetStoreType>()(
         const savingCat = get().getCategoryByID("Savings")
         return get().expenses.reduce((acc, expense) => expense.category === savingCat ? acc + expense.amount : acc + 0, 0);
       },
-      addIncome: () => {
-        const incomeCat = get().getCategoryByID("Income")
-        return get().expenses.reduce((acc, expense) => expense.category === incomeCat ? acc + expense.amount : acc + 0, 0);
-      },
+      addIncome: (incomeAmount) => set((state) => ({
+        budget: state.budget + incomeAmount
+      })),
       addSavings: () => set(() => ({ savings: get().savings + get().getTotalExpenses() })),
       deleteExpense: (expenseID) =>
         set(() => ({

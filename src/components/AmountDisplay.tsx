@@ -13,7 +13,7 @@ type AmountDisplayProps = {
 }
 
 export const AmountDisplay = ({ expense }: AmountDisplayProps) => {
-  const { deleteExpense, setEditingExpense, getCategoryByID } = useBudgetStore()
+  const { deleteExpense, setEditingExpense, getCategoryByID, } = useBudgetStore()
 
 
   const handleDelete = () => {
