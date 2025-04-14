@@ -18,10 +18,13 @@ export const AmountDisplay = ({ expense }: AmountDisplayProps) => {
 
   const handleDelete = () => {
 
+    //TODO: if the expense is income reduce the income from the budget when deleting
     deleteExpense(expense.id)
   }
 
   const handleEdit = () => {
+
+
     setEditingExpense(expense.id)
 
 

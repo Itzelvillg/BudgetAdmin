@@ -4,7 +4,7 @@ import { Category, Expense } from "../types";
 import { categories } from "../data/categories";
 
 type BudgetStoreType = {
-  budget: number;
+  initialBudget: number;
   expenses: Expense[];
   savings: number;
   isModalOpen: boolean;
@@ -29,7 +29,7 @@ type BudgetStoreType = {
 export const useBudgetStore = create<BudgetStoreType>()(
   persist(
     (set, get) => ({
-      budget: 0,
+      initialBudget: 0,
       savings: 0,
       expenses: [],
       isModalOpen: false,
@@ -53,14 +53,14 @@ export const useBudgetStore = create<BudgetStoreType>()(
         return get().expenses.reduce((acc, expense) => expense.category === savingCat || expense.category === incomeCat ? acc + 0 : acc + expense.amount, 0);
       },
       getRemaningBudget: () => {
-        return get().budget - get().getTotalExpenses();
+        return get().initialBudget - get().getTotalExpenses();
       },
       getSavings: () => {
         const savingCat = get().getCategoryByID("Savings")
         return get().expenses.reduce((acc, expense) => expense.category === savingCat ? acc + expense.amount : acc + 0, 0);
       },
       addIncome: (incomeAmount) => set((state) => ({
-        budget: state.budget + incomeAmount
+        initialBudget: state.initialBudget + incomeAmount
       })),
       addSavings: () => set(() => ({ savings: get().savings + get().getTotalExpenses() })),
       deleteExpense: (expenseID) =>
@@ -71,7 +71,7 @@ export const useBudgetStore = create<BudgetStoreType>()(
         })),
       setCurrentCategory: (categoryID) =>
         set(() => ({ currentCategory: categoryID })),
-      addBudget: (initialBudget = 0) => set(() => ({ budget: initialBudget })),
+      addBudget: (initialBudget = 0) => set(() => ({ initialBudget: initialBudget })),
 
       addExpenses: (expense: Expense) =>
         set((state) => ({
@@ -82,7 +82,7 @@ export const useBudgetStore = create<BudgetStoreType>()(
 
       resetApp: () =>
         set({
-          budget: 0,
+          initialBudget: 0,
           savings: 0,
           editingExpense: "",
           expenses: [],
@@ -111,7 +111,7 @@ export const useBudgetStore = create<BudgetStoreType>()(
     {
       name: "budget-tracker-storage",
       partialize: (state) => ({
-        budget: state.budget,
+        budget: state.initialBudget,
         expenses: state.expenses,
         savings: state.savings
 
