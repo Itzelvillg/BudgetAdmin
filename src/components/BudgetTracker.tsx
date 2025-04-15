@@ -7,6 +7,7 @@ import { useBudgetStore } from "../store/useBudgetStore";
 
 export const BudgetTracker = () => {
 
+
   const { initialBudget, getRemaningBudget, getSavings, getTotalExpenses } = useBudgetStore();
 
   const percentageColor = () => {
