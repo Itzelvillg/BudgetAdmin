@@ -4,26 +4,41 @@ import { useBudgetStore } from "../store/useBudgetStore";
 
 
 
+
 export const BudgetTracker = () => {
 
-
   const { budget, getRemaningBudget, getSavings, getTotalExpenses } = useBudgetStore();
+
+  const percentageColor = () => {
+
+    const total = budget - getTotalExpenses();
+    if (total < 0) {
+      return 'text-red-500';
+    } else if (total > budget * 0.5) {
+      return 'text-green-500';
+    } else if (total > budget * 0.2) {
+      return 'text-yellow-500';
+    } else {
+      return 'text-red-500';
+    }
+
+  }
   return (
     <>
       <h1 className="text-4xl font-black text-center text-blue-700">Budget Tracker</h1>
       < div>
         <h2 className="text-2xl font-bold">Budget: {formatCurrency(budget)}</h2>
         <div className="flex items-center justify-between mt-5">
-          <div className="flex flex-col items-center bg-green-900 p-4 rounded text-white">
-            <p className="text-gray-500">Remaining:</p>
-            <p className="text-3xl font-bold">{formatCurrency(getRemaningBudget())}</p>
+          <div className="flex flex-col items-center p-4 rounded">
+            <p className="text-gray-800">Remaining:</p>
+            <p className={`text-3xl font-bold ${percentageColor()}`}>{formatCurrency(getRemaningBudget())}</p>
           </div>
-          <div className="flex flex-col items-center bg-green-900 p-4 rounded text-white">
-            <p className="text-gray-500">Savings:</p>
-            <p className="text-3xl font-bold">{formatCurrency(getSavings())}</p>
+          <div className="flex flex-col items-center  p-4 rounded">
+            <p className='text-gray-800'>Savings:</p>
+            <p className={`text-3xl font-bold   ${getSavings() > 0 ? 'text-green-500' : 'text-gray-500'} `}>{formatCurrency(getSavings())}</p>
           </div>
-          <div className="flex flex-col items-center bg-black p-4 rounded text-white">
-            <p className="text-gray-500">Spent so far:</p>
+          <div className="flex flex-col items-center p-4 rounded">
+            <p className="text-gray-800">Spent so far:</p>
             <p className="text-3xl font-bold">{formatCurrency(getTotalExpenses())}</p>
           </div>
         </div>

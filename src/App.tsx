@@ -23,9 +23,9 @@ export const App = () => {
   ).toFixed(2);
 
   return (
-    <div className="bg-gray-100 min-h-screen">
-      <header className="bg-blue-700 text-white text-center py-8 max-h-72 flex justify-between px-10">
-        <h1 className="uppercase text-4xl font-black text-white">
+    <div className=" min-h-screen">
+      <header className=" text-center py-8 max-h-72 flex justify-between px-10 border-b-1 border-slate-200 ">
+        <h1 className="uppercase text-4xl font-black text-black">
           {" "}
           Personal Finance tracker
         </h1>
@@ -39,11 +39,11 @@ export const App = () => {
       </header>
       <div className="flex gap-5 px-5">
         <section className="container mx-auto h-fit">
-          <div className=" bg-white shadow-lg p-10 mt-10 rounded-lg">
+          <div className=" bg-white shadow-xl shadow-slate-200 border-t-4 border-indigo-700 p-10 mt-10 rounded-lg">
             {isValidBudget ? <BudgetTracker /> : <BudgetForm />}
           </div>
           {isValidBudget && (
-            <aside className=" bg-white shadow-lg p-10 mt-10 rounded-lg  space-y-10 h-132">
+            <aside className=" bg-white shadow-xl shadow-slate-200 p-10 mt-10 rounded-lg  space-y-10 h-132">
               <h2 className="text-2xl font-bold text-center uppercase">Budget Usage</h2>
               <CircularProgressbar
                 className="h-80"
@@ -64,7 +64,7 @@ export const App = () => {
         </section>
 
         {isValidBudget && (
-          <main className="container mx-auto overflow-y-scroll h-200 bg-white shadow-lg p-10 mt-10 rounded-lg">
+          <main className="container w-300 overflow-y-scroll h-200 bg-white shadow-xl border-t-4 border-amber-700 shadow-slate-200 p-10 mt-10 rounded-lg">
             <FilterByCategory />
             <ExpenseList />
             <ExpenseModal />

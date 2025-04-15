@@ -33,23 +33,23 @@ export const AmountDisplay = ({ expense }: AmountDisplayProps) => {
 
 
   return (
-    <div className="flex bg-stone-50 w-full h-30 items-center mt-5 shadow-md shadow-slate-200 border-t-1 border-t-slate-100 rounded-lg">
-      <div className={`${categoryInfo.color} w-2 h-full rounded-l-lg  p-2`}></div>
+    <div className="flex bg-stone-50 w-full h-25 items-center mt-5 shadow-md shadow-slate-200 border-t-1 border-t-slate-100 rounded-lg">
+      <div className={`${categoryInfo.color} w-2 h-full rounded-l-lg  p-1`}></div>
       <section className="flex justify-between w-full items-center p-5">
 
         <div className=" flex gap-6 justify-center items-center p-4">
           <img src={`${categoryInfo.icon}.png`} alt={categoryInfo.name} className="rounded-lg w-13 h-fit " />
 
-          <div className="flex flex-col gap-2">
-            <p className="text-slate-600  ">{expense.date?.toLocaleString()}</p>
-            <h2 className="text-2xl font-bold font- ">{expense.expenseName}</h2>
-            <p className={`${isIncomeOrSavings ? 'text-green-800' : 'text-red-600'} text-lg`}>{`${isIncomeOrSavings ? "+" : "-"} ${formatCurrency(+expense.amount)}`}</p>
+          <div className="flex flex-col ">
+            <p className="text-slate-600 items-end text-sm ">{expense.date?.toLocaleString()}</p>
+            <h2 className="text-xl font-bold text-gray-700 ">{expense.expenseName}</h2>
+            <p className={` text-sm ${isIncomeOrSavings ? 'text-green-800' : 'text-red-600'} text-lg`}>{`${isIncomeOrSavings ? "+" : "-"} ${formatCurrency(+expense.amount)}`}</p>
           </div>
         </div>
 
         <div className="flex flex-col">
-          <button className=" hover:border-blue-200 hover:border-4 text-white px-2 py-1 mt-2 rounded-md" onClick={handleEdit}  ><img src="edit.png" className="w-8 h-auto" alt="edit" /> </button>
-          <button className="hover:border-red-200 hover:border-4 text-white px-2 py-1 mt-2 rounded-md" onClick={handleDelete}><img src="delete.png" className="w-8 h-auto" alt="edit" /></button>
+          <button className=" text-white px-2 py-1 mt-2 rounded-md" onClick={handleEdit}  ><img src="edit.png" className="w-6 h-auto" alt="edit" /> </button>
+          <button className="text-white px-2 py-1 mt-2 rounded-md" onClick={handleDelete}><img src="delete.png" className="w-8 h-auto" alt="edit" /></button>
 
         </div>
       </section >
