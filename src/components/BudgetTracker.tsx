@@ -7,16 +7,16 @@ import { useBudgetStore } from "../store/useBudgetStore";
 
 export const BudgetTracker = () => {
 
-  const { budget, getRemaningBudget, getSavings, getTotalExpenses } = useBudgetStore();
+  const { initialBudget, getRemaningBudget, getSavings, getTotalExpenses } = useBudgetStore();
 
   const percentageColor = () => {
 
-    const total = budget - getTotalExpenses();
+    const total = initialBudget - getTotalExpenses();
     if (total < 0) {
       return 'text-red-500';
-    } else if (total > budget * 0.5) {
+    } else if (total > initialBudget * 0.5) {
       return 'text-green-500';
-    } else if (total > budget * 0.2) {
+    } else if (total > initialBudget * 0.2) {
       return 'text-yellow-500';
     } else {
       return 'text-red-500';
@@ -27,7 +27,7 @@ export const BudgetTracker = () => {
     <>
       <h1 className="text-4xl font-black text-center text-blue-700">Budget Tracker</h1>
       < div>
-        <h2 className="text-2xl font-bold">Budget: {formatCurrency(budget)}</h2>
+        <h2 className="text-2xl font-bold">Budget: {formatCurrency(initialBudget)}</h2>
         <div className="flex items-center justify-between mt-5">
           <div className="flex flex-col items-center p-4 rounded">
             <p className="text-gray-800">Remaining:</p>

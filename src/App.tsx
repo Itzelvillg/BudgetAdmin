@@ -11,14 +11,14 @@ import { useBudgetStore } from "./store/useBudgetStore";
 
 export const App = () => {
 
-  const { budget, resetApp, getRemaningBudget } = useBudgetStore()
+  const { initialBudget, resetApp, getRemaningBudget } = useBudgetStore()
 
 
 
-  const isValidBudget = useMemo(() => +budget > 0, [budget]);
+  const isValidBudget = useMemo(() => +initialBudget > 0, [initialBudget]);
 
   const percentage = +(
-    ((budget - getRemaningBudget()) / budget) *
+    ((initialBudget - getRemaningBudget()) / initialBudget) *
     100
   ).toFixed(2);
 
