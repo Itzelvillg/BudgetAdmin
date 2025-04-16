@@ -24,20 +24,20 @@ export const App = () => {
 
   return (
     <div className=" min-h-screen pb-10">
-      <header className=" text-center py-8 max-h-72 flex justify-between px-10 border-b-1 border-slate-200 ">
-        <h1 className="uppercase text-4xl font-black text-gray-700">
+      <header className=" text-center space-y-2  items-center md:justify-between justify-center py-8 max-h-72 flex justify-between px-10 border-b-1 border-slate-200 flex-col md:flex-row">
+        <h1 className="uppercase text-xl md:text-4xl font-black text-gray-700">
           {" "}
           Personal Finance tracker
         </h1>
 
         <button
-          className="bg-pink-600 w-50 p-2 uppercase rounded-lg text-white font-bold"
+          className="bg-pink-600 w-50 md:w-50 p-2 uppercase rounded-lg text-white font-bold"
           onClick={() => resetApp()}
         >
           Reset APP
         </button>
       </header>
-      <div className="flex gap-5 px-5 pb-10">
+      <div className="flex gap-5 px-5 pb-10 flex-col md:flex-row lg:flex-row">
         <section className="container mx-auto h-fit">
           <div className=" bg-white shadow-xl shadow-slate-200 border-t-4 border-indigo-700 p-10 mt-10 rounded-lg">
             {isValidBudget ? <BudgetTracker /> : <BudgetForm />}
@@ -64,7 +64,7 @@ export const App = () => {
         </section>
 
         {isValidBudget && (
-          <main className="container w-300 overflow-y-scroll max-h-178 bg-white shadow-xl border-t-4 border-green-600 shadow-slate-200 p-10 mt-10 rounded-lg">
+          <main className="container  w-auto md:w-300 overflow-y-scroll max-h-178 bg-white shadow-xl border-t-4 border-green-600 shadow-slate-200 p-10 mt-10 rounded-lg">
             <FilterByCategory />
             <ExpenseList />
             <ExpenseModal />
