@@ -111,7 +111,7 @@ export const useBudgetStore = create<BudgetStoreType>()(
     {
       name: "budget-tracker-storage",
       partialize: (state) => ({
-        budget: state.initialBudget,
+        initialBudget: state.initialBudget,
         expenses: state.expenses,
         savings: state.savings
 

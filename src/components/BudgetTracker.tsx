@@ -26,7 +26,11 @@ export const BudgetTracker = () => {
   }
   return (
     <>
-      <h1 className="text-4xl font-black text-center text-blue-700">Budget Tracker</h1>
+      <div className="flex">
+        <img src="presupuesto.png" alt="quick budget" className="w-15 h-15 mx-auto" />
+        <h1 className="text-4xl font-black text-blue-700">Quick Budget Recap</h1>
+
+      </div>
       < div>
         <h2 className="text-2xl font-bold">Budget: {formatCurrency(initialBudget)}</h2>
         <div className="flex items-center justify-between mt-5">
