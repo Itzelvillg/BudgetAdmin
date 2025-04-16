@@ -25,7 +25,7 @@ export const App = () => {
   return (
     <div className=" min-h-screen pb-10">
       <header className=" text-center py-8 max-h-72 flex justify-between px-10 border-b-1 border-slate-200 ">
-        <h1 className="uppercase text-4xl font-black text-black">
+        <h1 className="uppercase text-4xl font-black text-gray-700">
           {" "}
           Personal Finance tracker
         </h1>
@@ -44,7 +44,7 @@ export const App = () => {
           </div>
           {isValidBudget && (
             <aside className=" border-t-4 border-t-fuchsia-700 bg-white shadow-xl shadow-slate-200  mt-10 rounded-lg  space-y-10 h-100">
-              <h2 className="text-2xl font-bold text-center uppercase mt-10">Budget Usage</h2>
+              <h2 className="text-2xl font-bold text-center uppercase mt-8">Budget Usage</h2>
               <CircularProgressbar
                 className="h-60"
                 value={percentage}

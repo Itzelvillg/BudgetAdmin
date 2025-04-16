@@ -15,7 +15,7 @@ export const FilterByCategory = () => {
   return (
 
 
-    <form className="flex gap-5 mb-5p-5 rounded-br-lg  w-fit">
+    <form className="flex gap-5  rounded-br-lg  w-fit">
       <label htmlFor="category" className=" font-bold uppercase self-center  ">Filter by category</label>
       <select value={currentCategory} onChange={handleSelectCategory} className="text-gray-800 w-fit p-2 border-2 bg-slate-50   border-gray-100 rounded-lg  ">
         <option value="" id="category">--All categories</option>
