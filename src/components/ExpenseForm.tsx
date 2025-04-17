@@ -93,7 +93,7 @@ export const ExpenseForm = () => {
 
       <div className="flex flex-col gap-2">
         <label htmlFor="amount" className=" text-2xl">Expense amount</label>
-        <input onChange={handleChange} value={expense.amount} type="number" id="amount" name="amount" placeholder="Add the amount" className="p-2 border bg-slate-100 border-slate-300 rounded-md" />
+        <input onChange={handleChange} value={expense.amount} type="number" id="amount" name="amount" className="p-2 border bg-slate-100 border-slate-300 rounded-md" />
       </div>
 
       <div className="flex flex-col gap-2">

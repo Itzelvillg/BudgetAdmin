@@ -25,7 +25,7 @@ export const App = () => {
   return (
     <div className=" min-h-screen pb-10">
       <header className=" text-center space-y-2  items-center md:justify-between justify-center py-8 max-h-72 flex justify-between px-10 border-b-1 border-slate-200 flex-col md:flex-row">
-        <h1 className="uppercase text-xl md:text-4xl font-black text-gray-700">
+        <h1 className="uppercase text-xl  md:text-4xl font-black text-gray-700">
           {" "}
           Personal Finance tracker
         </h1>
@@ -64,7 +64,7 @@ export const App = () => {
         </section>
 
         {isValidBudget && (
-          <main className="container  w-auto md:w-300 overflow-y-scroll max-h-178 bg-white shadow-xl border-t-4 border-green-600 shadow-slate-200 p-10 mt-10 rounded-lg">
+          <main className="container  w-auto md:w-300 overflow-y-scroll max-h-178 bg-white shadow-xl border-t-4 border-green-600 shadow-slate-200 p-5 md:p-10 mt-10 rounded-lg">
             <FilterByCategory />
             <ExpenseList />
             <ExpenseModal />
