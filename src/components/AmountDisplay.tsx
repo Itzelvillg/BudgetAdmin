@@ -50,7 +50,7 @@ export const AmountDisplay = ({ expense }: AmountDisplayProps) => {
       <section className="flex justify-between w-full items-center p-5">
 
         <div className=" flex  gap-4 md:gap-6 justify-center items-center p-2 md:p-4">
-          <img src={`${categoryInfo.icon}.png`} alt={categoryInfo.name} className="rounded-lg w-10 md:w-13 h-fit " />
+          <img src={`${categoryInfo.icon}.png`} alt={categoryInfo.name} className="rounded-lg w-10 h-10 md:w-13 md:h-fit " />
 
           <div className="flex flex-col ">
             <p className="text-slate-600 items-end text-xs md:text-sm ">{expense.date?.toLocaleString()}</p>
