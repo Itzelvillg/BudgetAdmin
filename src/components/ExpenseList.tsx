@@ -15,7 +15,7 @@ export const ExpenseList = () => {
   return (
     <div className=" ">
       {!isEmpty || filteredExpenses.length > 0 && <h2 className="text-2xl font-bold  uppercase">Expenses list</h2>}
-      {isEmpty || filteredExpenses.length <= 0 ? <p className="text-xl font-bold text-gray-700 mt-10 w-full border-b-1 pb-2 border-gray-300 "> No expenses yet 😴 </p> :
+      {isEmpty || filteredExpenses.length <= 0 ? <p className="text-xl font-bold text-gray-700 mt-10 w-full border-b-1 pb-2 border-gray-300 "> No expenses or incomes yet 😴 </p> :
 
         filteredExpenses.map((expenseItem) =>
           <AmountDisplay key={expenseItem.id} expense={expenseItem} />

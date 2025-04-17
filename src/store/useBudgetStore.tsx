@@ -25,6 +25,7 @@ type BudgetStoreType = {
   addSavings: () => void;
   addIncome: (incomeAmount: number) => void;
   getCategoryByID: (categoryName: string | number) => string | number;
+  reduceIncome: (incomeAmount: number) => void;
 };
 export const useBudgetStore = create<BudgetStoreType>()(
   persist(
@@ -61,6 +62,9 @@ export const useBudgetStore = create<BudgetStoreType>()(
       },
       addIncome: (incomeAmount) => set((state) => ({
         initialBudget: state.initialBudget + incomeAmount
+      })),
+      reduceIncome: (incomeAmount) => set((state) => ({
+        initialBudget: state.initialBudget - incomeAmount
       })),
       addSavings: () => set(() => ({ savings: get().savings + get().getTotalExpenses() })),
       deleteExpense: (expenseID) =>

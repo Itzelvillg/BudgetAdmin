@@ -13,19 +13,24 @@ type AmountDisplayProps = {
 }
 
 export const AmountDisplay = ({ expense }: AmountDisplayProps) => {
-  const { deleteExpense, setEditingExpense, getCategoryByID, } = useBudgetStore()
+  const { deleteExpense, setEditingExpense, getCategoryByID, reduceIncome } = useBudgetStore()
 
 
   const handleDelete = () => {
 
     //TODO: if the expense is income reduce the income from the budget when deleting
     deleteExpense(expense.id)
+    if (expense.category === getCategoryByID("Income")) {
+
+      reduceIncome(expense.amount)
+    }
   }
 
   const handleEdit = () => {
 
 
     setEditingExpense(expense.id)
+
 
 
   }
