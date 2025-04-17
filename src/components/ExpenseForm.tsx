@@ -64,7 +64,11 @@ export const ExpenseForm = () => {
       const currentEditingExpense = { ...expense, id: editingExpense }
 
 
-      //update
+
+      if (expense.category === getCategoryByID("Income")) {
+
+        addIncome(expense.amount)
+      }
       updateExpense(currentEditingExpense)
       return
     }

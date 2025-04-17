@@ -31,6 +31,10 @@ export const AmountDisplay = ({ expense }: AmountDisplayProps) => {
 
     setEditingExpense(expense.id)
 
+    if (expense.category === getCategoryByID("Income")) {
+
+      reduceIncome(expense.amount)
+    }
 
 
   }
