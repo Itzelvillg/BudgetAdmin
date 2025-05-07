@@ -31,7 +31,7 @@ export const FilterByCategory = () => {
         </select>
       </div>
       <button className="bg-pink-500 hover:bg-pink-600 w-full md:w-auto p-2 uppercase rounded-lg text-white font-bold self-end" onClick={saveXsxl}>
-        💾 Save as Excel</button>
+        💾 Save as Excel </button>
     </form>
 
   )
