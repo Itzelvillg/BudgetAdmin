@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { persist } from 'zustand/middleware';
 import { Category, Expense } from "../types";
 import { categories } from "../data/categories";
+import { dataToXLSX } from "../helpers";
 
 type BudgetStoreType = {
   initialBudget: number;
@@ -26,6 +27,7 @@ type BudgetStoreType = {
   addIncome: (incomeAmount: number) => void;
   getCategoryByID: (categoryName: string | number) => string | number;
   reduceIncome: (incomeAmount: number) => void;
+  saveXsxl: () => void;
 };
 export const useBudgetStore = create<BudgetStoreType>()(
   persist(
@@ -59,6 +61,15 @@ export const useBudgetStore = create<BudgetStoreType>()(
       getSavings: () => {
         const savingCat = get().getCategoryByID("Savings")
         return get().expenses.reduce((acc, expense) => expense.category === savingCat ? acc + expense.amount : acc + 0, 0);
+      },
+      saveXsxl: () => {
+        const data = get().expenses.map((expense) => ({
+          "Expense Name": expense.expenseName,
+          Amount: expense.amount,
+          Date: expense.date?.toLocaleString(),
+          Category: categories.filter((cat) => cat.id === expense.category)[0].name,
+        }));
+        dataToXLSX(data)
       },
       addIncome: (incomeAmount) => set((state) => ({
         initialBudget: state.initialBudget + incomeAmount

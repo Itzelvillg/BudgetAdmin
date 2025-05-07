@@ -46,6 +46,7 @@ export const BudgetTracker = () => {
             <p className="text-gray-700">Spent so far:</p>
             <p className="text-xl md:text-3xl font-bold text-gray-700">{formatCurrency(getTotalExpenses())}</p>
           </div>
+
         </div>
 
       </div>

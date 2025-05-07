@@ -31,7 +31,7 @@ export const App = () => {
         </h1>
 
         <button
-          className="bg-pink-600 w-50 md:w-50 p-2 uppercase rounded-lg text-white font-bold"
+          className="bg-pink-500 hover:bg-pink-600 w-50 md:w-50 p-2 uppercase rounded-lg text-white font-bold"
           onClick={() => resetApp()}
         >
           Reset APP
